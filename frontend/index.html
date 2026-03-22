@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rene: Knowledge Graph</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0a0a0a',
+                        carmine: '#f87171',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-obsidian text-slate-200 overflow-hidden font-sans selection:bg-carmine selection:text-black">
+
+    <div id="graph-container" class="absolute inset-0 z-0"></div>
+
+    <div id="search-bar" class="absolute top-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-4 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-2xl transition-all hover:border-white/20">
+        
+        <input type="text" id="topic-input" placeholder="Map a topic..." autocomplete="off" 
+            class="bg-black/50 border border-white/5 text-white px-4 py-2 w-72 rounded-xl text-sm outline-none focus:ring-1 focus:ring-carmine transition-all placeholder:text-slate-500">
+        
+        <div class="flex flex-col items-center justify-center min-w-[70px]">
+            <span id="node-label" class="text-[10px] text-slate-400 font-medium tracking-wider mb-1">NODES: 10</span>
+            <input type="range" id="node-slider" min="5" max="15" value="10" 
+                class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-carmine">
+        </div>
+
+        <button id="search-btn" class="bg-carmine/90 hover:bg-red-500 text-black font-bold text-sm px-5 py-2 rounded-xl transition-all duration-200 shadow-[0_0_15px_rgba(248,113,113,0.3)] hover:shadow-[0_0_25px_rgba(248,113,113,0.6)]">
+            Synthesize
+        </button>
+        
+        <div id="status" class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-carmine animate-pulse font-medium tracking-wide"></div>
+    </div>
+
+    <div id="details-panel" class="hidden absolute top-6 right-6 w-96 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl transition-all duration-500 ease-out z-10 flex flex-col max-h-[90vh]">
+        
+        <div class="flex justify-between items-start p-6 pb-4 border-b border-white/5">
+            <h2 id="panel-title" class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-carmine to-red-400">Topic Name</h2>
+            <button id="close-panel" class="text-slate-500 hover:text-white transition-colors p-1 rounded-md hover:bg-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto custom-scrollbar">
+            <p id="panel-desc" class="text-sm text-slate-300 leading-relaxed mb-5 font-medium"></p>
+            <div id="panel-bullets" class="text-sm text-slate-400 leading-relaxed mb-5 border-l-2 border-slate-700 pl-4 space-y-2"></div>
+            <div id="panel-math" class="bg-black/60 border border-white/5 rounded-xl p-4 text-center overflow-x-auto shadow-inner"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/force-graph"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

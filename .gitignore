@@ -1,0 +1,18 @@
+# Environments & Secrets
+.env
+.venv/
+env/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Database
+rene_cache.db
+*.sqlite3
+
+# IDEs & OS Junk (Future-proofing)
+.vscode/
+.idea/
+.DS_Store
