@@ -2,6 +2,8 @@
 
 **Rene** is a lightweight, high-performance knowledge mapping engine. It transforms any complex topic into an interactive, "Obsidian-style" 2D physics graph with integrated short notes, bullet points, and LaTeX math rendering.
 
+<img width="1920" height="1048" alt="Screenshot_2026-03-23_08-09-30" src="https://github.com/user-attachments/assets/02d301f9-e949-41b4-933b-2578c3d0bfb7" />
+
 Created as a specialized "Deep Work" sandbox to provide instant, structured clarity for students (JEE, NEET, UPSC).
 
 ## 🚀 The Stack
@@ -34,11 +36,15 @@ cp .env.example .env
 *Open `.env` and paste your key:* `GROQ_API_KEY=gsk_your_key_here`
 
 ### **3. Ignite**
-```bash
-uvicorn backend.main:app --reload
-```
-Visit `http://127.0.0.1:8000` to start mapping.
+**CRITICAL:** You must run this command from the root `Rene` directory, *not* inside the `backend` or `frontend` folders. 
 
+Ensure your virtual environment is active, then run the backend server using the explicit Python module path:
+
+```bash
+# 1. Ensure you are in the root project folder
+cd Rene
+# 2. Ignite the engine
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8001 --reload
 ---
 
 ## 🎨 Features
